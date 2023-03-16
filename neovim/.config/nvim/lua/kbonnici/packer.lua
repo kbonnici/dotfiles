@@ -37,7 +37,7 @@ return packer.startup(function(use)
         run = ':TSUpdate'
     }
 
-    -- lsp zero
+    -- lsp
     use {
         'VonHeikemen/lsp-zero.nvim',
         branch = 'v1.x',
@@ -60,6 +60,9 @@ return packer.startup(function(use)
             { 'rafamadriz/friendly-snippets' }, -- Optional
         }
     }
+
+    -- typescript extension
+    use("jose-elias-alvarez/typescript.nvim")
 
     -- colorschemes
     use { "catppuccin/nvim", as = "catppuccin" }
