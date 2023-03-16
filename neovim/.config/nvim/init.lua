@@ -1,3 +1,6 @@
+require('kbonnici.packer')
 require('kbonnici.core.options')
 require('kbonnici.core.mappings')
 require('kbonnici.core.colorscheme')
+require('kbonnici.plugin.lsp')
+require('kbonnici.plugin.treesitter')
