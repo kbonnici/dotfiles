@@ -20,16 +20,31 @@ map("n", "n", "nzzzv")
 map("n", "N", "Nzzzv")
 
 -- keep yanked text when pasting
-map("x", "<leader>p", "\"_dP")
+map("x", "<leader>p", '\"_dP')
 
 -- yank to system clipboard
-map("n", "<leader>y", "\"+y")
-map("v", "<leader>y", "\"+y")
-map("n", "<leader>Y", "\"+Y")
+map("n", "<leader>y", '\"+y')
+map("v", "<leader>y", '\"+y')
+map("n", "<leader>Y", '\"+Y')
 
 -- delete into void register
-map("n", "<leader>d", "\"_d")
-map("v", "<leader>d", "\"_d")
+map("n", "<leader>d", '"_d')
+map("v", "<leader>d", '"_d')
+
+-- cut character into void register
+map("n", "x", '"_x')
 
 -- remove Q mapping (can remap to something later?)
 map("n", "Q", "<nop>")
+
+-- splits
+map("n", "<leader>sh", "<C-w>s") -- horizontal split
+map("n", "<leader>sv", "<C-w>v") -- vertical split
+map("n", "<leader>se", "<C-w>=") -- set splits to equal width
+map("n", "<leader>sx", ":close<CR>") -- close current split
+
+-- tabs
+map("n", "<leader>to", ":tabnew<CR>") -- open new tab
+map("n", "<leader>tx", ":tabclose<CR>") -- close current tab
+map("n", "<leader>tn", ":tabn<CR>") -- next tab
+map("n", "<leader>tp", ":tabp<CR>") -- prev tab
