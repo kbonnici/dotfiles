@@ -1,4 +1,8 @@
-local lsp = require('lsp-zero')
+local status, lsp = pcall(require, 'lsp-zero')
+if not status then
+    print('[Error]: LSP-Zero not installed!')
+    return
+end
 
 lsp.preset('recommended')
 
@@ -9,7 +13,7 @@ lsp.ensure_installed({
 	'rust_analyzer',
 })
 
-lsp.on_attach(function(client, bufnr) 
+lsp.on_attach(function(_, bufnr) -- (client, bufnr)
 	local opts = {buffer = bufnr, remap = false}
 	local map = vim.keymap.set
 
