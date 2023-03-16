@@ -4,6 +4,7 @@ if not status then
     return
 end
 
+
 lsp.preset('recommended')
 
 lsp.ensure_installed({
@@ -13,23 +14,26 @@ lsp.ensure_installed({
 	'rust_analyzer',
 })
 
+local function command(cmd)
+    return ":" .. cmd .. "<cr>"
+end
+
 lsp.on_attach(function(_, bufnr) -- (client, bufnr)
 	local opts = {buffer = bufnr, remap = false}
 	local map = vim.keymap.set
 
-    map("n", "gd", 		    function() vim.lsp.buf.definition() end, opts)
-    map("n", "K", 		    function() vim.lsp.buf.hover() end, opts)
-    map("n", "<leader>la", 	function() vim.lsp.buf.code_action() end, opts)
-    map("n", "<leader>lr", 	function() vim.lsp.buf.references() end, opts)
-    map("n", "<leader>sr", 	function() vim.lsp.buf.rename() end, opts)
-    map("i", "<C-h>", 		function() vim.lsp.buf.signature_help() end, opts)
+    map("n", "gd", 		    command("Lspsaga peek_definition"), opts)
+    map("n", "gi", 		    command("lua vim.lsp.buf.implementation()"), opts)
+    map("n", "gf",          command("Lspsaga lsp_finder"), opts)
+    map("n", "K", 		    command("Lspsaga hover_doc"), opts)
+    map("n", "<leader>la", 	command("Lspsaga code_action"), opts)
+    map("n", "<leader>lr", 	command("Lspsaga rename"), opts)
 
-    map("n", "gl", 		    function() vim.diagnostic.open_float() end, opts)
-    map("n", "<leader>gn", 	function() vim.diagnostic.goto_next() end, opts)
-    map("n", "<leader>gp", 	function() vim.diagnostic.goto_prev() end, opts)
+    map("n", "gl", 		    command("Lspsaga show_line_diagnostics"), opts)
+    map("n", "gn", 	command("Lspsaga diagnostic_jump_next"), opts)
+    map("n", "gp", 	command("Lspsaga diagnostic_jump_prev"), opts)
 
 end)
-
 -- enable vim global variable in lua
 lsp.nvim_workspace()
 

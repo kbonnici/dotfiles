@@ -61,6 +61,9 @@ return packer.startup(function(use)
         }
     }
 
+    use({ "glepnir/lspsaga.nvim", branch = "main" })
+    use("onsails/lspkind.nvim")
+
     -- typescript extension
     use("jose-elias-alvarez/typescript.nvim")
 

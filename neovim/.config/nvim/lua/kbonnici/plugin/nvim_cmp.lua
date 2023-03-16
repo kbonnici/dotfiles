@@ -6,6 +6,12 @@ if not status then
     return
 end
 
+local kind_status, lspkind = pcall(require, "lspkind")
+
+if not kind_status then
+    print('[Error]: lspkind not installed!')
+    return
+end
 
 cmp.setup({
     mapping = cmp.mapping.preset.insert({
@@ -14,14 +20,12 @@ cmp.setup({
         ['<C-b>'] = cmp.mapping.scroll_docs(-4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
     }),
-
     sources = {
         { name = "nvim_lsp" },
         { name = "luasnip" },
         { name = "path" },
         { name = "buffer" },
     },
-
     window = {
         completion = cmp.config.window.bordered({
             border = "rounded",
@@ -29,19 +33,9 @@ cmp.setup({
         })
     },
     formatting = {
-        format = function(_, vim_item)
-            local function trim(text)
-                local max = math.floor(vim.api.nvim_win_get_width(0) / 4)
-
-                if text and text:len() > max then
-                    text = text:sub(1, max) .. "..."
-                end
-
-                return text
-            end
-
-            vim_item.abbr = trim(vim_item.abbr)
-            return vim_item
-        end
+        format = lspkind.cmp_format({
+            maxwidth = math.floor(vim.api.nvim_win_get_width(0)/4),
+            ellipsis_char = "...",
+        })
     }
 })
