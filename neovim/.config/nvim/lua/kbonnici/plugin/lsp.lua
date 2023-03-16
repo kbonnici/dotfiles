@@ -27,8 +27,6 @@ lsp.on_attach(function(_, bufnr) -- (client, bufnr)
     map("n", "gl", 		    function() vim.diagnostic.open_float() end, opts)
     map("n", "<leader>gn", 	function() vim.diagnostic.goto_next() end, opts)
     map("n", "<leader>gp", 	function() vim.diagnostic.goto_prev() end, opts)
-    map("n", "gl", 		    function() vim.diagnostic.open_float() end, opts)
-    map("n", "gl", 		    function() vim.diagnostic.open_float() end, opts)
 
 end)
 
