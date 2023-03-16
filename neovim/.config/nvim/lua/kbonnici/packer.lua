@@ -28,6 +28,9 @@ return packer.startup(function(use)
         requires = { { 'nvim-lua/plenary.nvim' } }
     }
 
+    -- web dev icons
+    use 'nvim-tree/nvim-web-devicons'
+
     -- treesitter
     use {
         'nvim-treesitter/nvim-treesitter',
@@ -71,6 +74,22 @@ return packer.startup(function(use)
             })
         end
     })
+
+    -- comment.nvim
+    use {
+        'numToStr/Comment.nvim',
+        config = function()
+            require('Comment').setup()
+        end
+    }
+
+    -- file browser
+    use {
+        'nvim-tree/nvim-tree.lua',
+        requires = {
+            'nvim-tree/nvim-web-devicons', -- optional
+        },
+    }
 
     if packer_bootstrap then
         require('packer').sync()
