@@ -67,6 +67,10 @@ return packer.startup(function(use)
     -- typescript extension
     use("jose-elias-alvarez/typescript.nvim")
 
+    -- null-ls
+    use("jose-elias-alvarez/null-ls.nvim")
+    use("jay-babu/mason-null-ls.nvim")
+
     -- colorschemes
     use { "catppuccin/nvim", as = "catppuccin" }
 
