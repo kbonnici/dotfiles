@@ -38,10 +38,10 @@ local lsp_formatting = function(bufnr)
 	})
 end
 
-local ts_nvim_status, ts_nvim = pcall(require, "typescript")
+local typescript_extensions_status, typescript_extensions = pcall(require, "typescript.extensions.null-ls.code-actions")
 
-if not ts_nvim_status then
-	print("[Error]: typescript_nvim not installed!")
+if not typescript_extensions_status then
+	print("[Error]: typescript-nvim extensions not installed!")
 	return
 end
 
@@ -50,7 +50,7 @@ null_ls.setup({
 		diagnostics.eslint_d,
 		formatting.prettierd,
 		formatting.stylua,
-		ts_nvim.extentions["null-ls"]["code-actions"],
+        typescript_extensions,
 	},
 	-- format on save
 	on_attach = function(client, bufnr)
