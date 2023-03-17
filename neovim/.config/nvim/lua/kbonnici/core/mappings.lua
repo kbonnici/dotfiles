@@ -1,7 +1,12 @@
 -- leader key
 vim.g.mapleader = " "
 
-local map = vim.keymap.set
+local map = function(mode, mapping, target, options)
+	local opts = options or {}
+	vim.keymap.set(mode, mapping, target, opts)
+end
+
+local opts = { silent = true, noremap = true }
 
 -- move selected text up and down
 map("v", "J", ":m '>+1<CR>gv=gv")
@@ -20,12 +25,12 @@ map("n", "n", "nzzzv")
 map("n", "N", "Nzzzv")
 
 -- keep yanked text when pasting
-map("x", "<leader>p", '\"_dP')
+map("x", "<leader>p", '"_dP')
 
 -- yank to system clipboard
-map("n", "<leader>y", '\"+y')
-map("v", "<leader>y", '\"+y')
-map("n", "<leader>Y", '\"+Y')
+map("n", "<leader>y", '"+y')
+map("v", "<leader>y", '"+y')
+map("n", "<leader>Y", '"+Y')
 
 -- delete into void register
 map("n", "<leader>d", '"_d')
@@ -58,10 +63,16 @@ map("n", "<leader>tx", ":tabclose<CR>") -- close current tab
 map("n", "<leader>tn", ":tabn<CR>") -- next tab
 map("n", "<leader>tp", ":tabp<CR>") -- prev tab
 
-
 -- nvim-tree
 map("n", "<leader>e", ":NvimTreeToggle<CR>")
 
 -- telescope mappings
 map("n", "<leader>ff", ":Telescope find_files<CR>")
 
+-- trouble mappings
+map("n", "<leader>xx", "<cmd>TroubleToggle<cr>", opts)
+map("n", "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>", opts)
+map("n", "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>", opts)
+map("n", "<leader>xl", "<cmd>TroubleToggle loclist<cr>", opts)
+map("n", "<leader>xq", "<cmd>TroubleToggle quickfix<cr>", opts)
+map("n", "gR", "<cmd>TroubleToggle lsp_references<cr>", opts)
