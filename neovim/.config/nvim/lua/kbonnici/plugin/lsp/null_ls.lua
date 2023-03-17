@@ -50,7 +50,8 @@ null_ls.setup({
 		diagnostics.eslint_d,
 		formatting.prettierd,
 		formatting.stylua,
-        typescript_extensions,
+		typescript_extensions,
+		null_ls.builtins.code_actions.gitsigns,
 	},
 	-- format on save
 	on_attach = function(client, bufnr)
