@@ -38,11 +38,19 @@ local lsp_formatting = function(bufnr)
 	})
 end
 
+local ts_nvim_status, ts_nvim = pcall(require, "typescript")
+
+if not ts_nvim_status then
+	print("[Error]: typescript_nvim not installed!")
+	return
+end
+
 null_ls.setup({
 	sources = {
 		diagnostics.eslint_d,
 		formatting.prettierd,
 		formatting.stylua,
+		ts_nvim.extentions["null-ls"]["code-actions"],
 	},
 	-- format on save
 	on_attach = function(client, bufnr)
