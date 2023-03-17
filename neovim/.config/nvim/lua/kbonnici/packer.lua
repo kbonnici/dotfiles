@@ -103,6 +103,7 @@ return packer.startup(function(use)
 
 	-- autopairs & autotags
 	use("windwp/nvim-autopairs")
+	use("windwp/nvim-ts-autotag")
 
 	if packer_bootstrap then
 		require("packer").sync()
