@@ -12,6 +12,7 @@ if not mason_null_ls_status then
 	return
 end
 
+local automatic_setup = true
 mason_null_ls.setup({
 	ensure_installed = {
 		"eslint_d",
@@ -19,7 +20,7 @@ mason_null_ls.setup({
 		"stylua",
 	},
 	automatic_installation = false,
-	automatic_setup = true, -- Recommended, but optional
+	automatic_setup = automatic_setup, -- Recommended, but optional
 })
 
 local formatting = null_ls.builtins.formatting
@@ -57,3 +58,7 @@ null_ls.setup({
 		end
 	end,
 })
+
+if automatic_setup then
+	mason_null_ls.setup_handlers()
+end
