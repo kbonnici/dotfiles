@@ -27,4 +27,4 @@ export NVM_DIR="$HOME/.nvm"
 # aliases
 which rg > /dev/null && alias grep="rg"
 which exa > /dev/null && alias ls="exa"
-
+which python3 > /dev/null && alias p3="python3"
