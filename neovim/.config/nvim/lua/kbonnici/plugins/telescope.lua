@@ -1,3 +1,17 @@
+function LoadTroubleMappings()
+    local ok, trouble = pcall(require, "trouble.providers.telescope")
+    if not ok then
+        return nil
+    end
+
+    local mapping = { ["<c-t>"] = trouble.open_with_trouble }
+
+    return {
+        i = mapping,
+        n = mapping,
+    }
+end
+
 return {
     {
         "nvim-telescope/telescope.nvim",
@@ -7,23 +21,25 @@ return {
             vim.keymap.set("n", "<leader>ff", builtin.find_files)
             vim.keymap.set("n", "<leader>fg", builtin.live_grep)
             vim.keymap.set("n", "<C-p>", builtin.git_files)
-        end
+        end,
     },
 
     {
-        'nvim-telescope/telescope-ui-select.nvim',
+        "nvim-telescope/telescope-ui-select.nvim",
         config = function()
             local telescope = require("telescope")
-            telescope.setup {
+            telescope.setup({
+                defaults = {
+                    mappings = LoadTroubleMappings() or require("telescope.config").values.default_mappings
+                },
                 extensions = {
                     ["ui-select"] = {
-                        require("telescope.themes").get_dropdown {
-                        }
-                    }
-                }
-            }
+                        require("telescope.themes").get_dropdown({}),
+                    },
+                },
+            })
 
             telescope.load_extension("ui-select")
-        end
-    }
+        end,
+    },
 }
