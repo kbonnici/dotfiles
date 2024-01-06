@@ -31,6 +31,9 @@ which nvim > /dev/null && alias vi="nvim"
 which nvim > /dev/null && alias v="nvim"
 which exa > /dev/null && alias ls="exa"
 which python3 > /dev/null && alias p3="python3"
+alias gs="git status"
+alias gc="git commit"
+alias gp="git push"
 
 # bun completions
 [ -s "/Users/karl/.bun/_bun" ] && source "/Users/karl/.bun/_bun"
