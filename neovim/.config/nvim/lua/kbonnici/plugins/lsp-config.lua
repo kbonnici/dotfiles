@@ -17,9 +17,6 @@ return {
         "neovim/nvim-lspconfig",
         config = function()
             local lspconfig = require("lspconfig")
-            vim.keymap.set("n", "K", vim.lsp.buf.hover)
-            vim.keymap.set("n", "gd", vim.lsp.buf.definition)
-            vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action)
             lspconfig.lua_ls.setup({})
             lspconfig.tsserver.setup({})
             lspconfig.html.setup({})

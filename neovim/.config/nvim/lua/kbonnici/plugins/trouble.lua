@@ -39,9 +39,9 @@ return {
 		--            print("Showing Location List")
 		--			trouble.toggle("loclist")
 		--		end)
-		vim.keymap.set("n", "gR", function()
-			print("Show References")
-			trouble.toggle("lsp_references")
-		end)
+--		vim.keymap.set("n", "gR", function()
+--			print("Show References")
+--			trouble.toggle("lsp_references")
+--		end)
 	end,
 }
