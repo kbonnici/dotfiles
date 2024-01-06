@@ -2,12 +2,9 @@
 vim.g.mapleader = " "
 
 local map = function(mode, mapping, target, options)
-    local opts = options or { silent = true, noremap = true }
-    vim.keymap.set(mode, mapping, target, opts)
+	local opts = options or { silent = true, noremap = true }
+	vim.keymap.set(mode, mapping, target, opts)
 end
-
-
-     map("i", "jk", "<esc><esc>")
 
 -- move selected text up and down
 map("v", "K", ":m '<-2<CR>gv=gv")
@@ -48,9 +45,9 @@ map("n", "<leader>q", ":q<CR>")
 map("n", "<leader>w", ":w<CR>")
 
 -- splits
-map("n", "<leader>sh", "<C-w>s")     -- horizontal split
-map("n", "<leader>sv", "<C-w>v")     -- vertical split
-map("n", "<leader>se", "<C-w>=")     -- set splits to equal width
+map("n", "<leader>sh", "<C-w>s") -- horizontal split
+map("n", "<leader>sv", "<C-w>v") -- vertical split
+map("n", "<leader>se", "<C-w>=") -- set splits to equal width
 map("n", "<leader>sx", ":close<CR>") -- close current split
 -- move between splits easily
 map("n", "<C-h>", "<C-w>h")
@@ -59,10 +56,10 @@ map("n", "<C-k>", "<C-w>k")
 map("n", "<C-l>", "<C-w>l")
 
 -- tabs
-map("n", "<leader>to", ":tabnew<CR>")   -- open new tab
+map("n", "<leader>to", ":tabnew<CR>") -- open new tab
 map("n", "<leader>tx", ":tabclose<CR>") -- close current tab
-map("n", "<leader>tn", ":tabn<CR>")     -- next tab
-map("n", "<leader>tp", ":tabp<CR>")     -- prev tab
+map("n", "<leader>tn", ":tabn<CR>") -- next tab
+map("n", "<leader>tp", ":tabp<CR>") -- prev tab
 
 -- telescope mappings
 
