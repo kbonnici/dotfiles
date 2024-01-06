@@ -5,7 +5,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -26,5 +26,19 @@ export NVM_DIR="$HOME/.nvm"
 
 # aliases
 which rg > /dev/null && alias grep="rg"
+which nvim > /dev/null && alias vim="nvim"
+which nvim > /dev/null && alias vi="nvim"
+which nvim > /dev/null && alias v="nvim"
 which exa > /dev/null && alias ls="exa"
 which python3 > /dev/null && alias p3="python3"
+
+# bun completions
+[ -s "/Users/karl/.bun/_bun" ] && source "/Users/karl/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
