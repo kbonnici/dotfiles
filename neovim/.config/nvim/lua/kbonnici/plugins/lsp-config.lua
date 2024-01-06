@@ -3,24 +3,33 @@ return {
         "williamboman/mason.nvim",
         config = function()
             require("mason").setup()
-        end
+        end,
     },
     {
         "williamboman/mason-lspconfig.nvim",
         config = function()
             require("mason-lspconfig").setup({
-                ensure_installed = { "lua_ls", "tsserver", "html", "cssls"}
+                ensure_installed = { "lua_ls", "tsserver", "html", "cssls" },
             })
-        end
+        end,
     },
     {
         "neovim/nvim-lspconfig",
         config = function()
+            local capabilities = require("cmp_nvim_lsp").default_capabilities()
             local lspconfig = require("lspconfig")
-            lspconfig.lua_ls.setup({})
-            lspconfig.tsserver.setup({})
-            lspconfig.html.setup({})
-            lspconfig.cssls.setup({})
-        end
-    }
+            lspconfig.lua_ls.setup({
+                capabilities = capabilities,
+            })
+            lspconfig.tsserver.setup({
+                capabilities = capabilities,
+            })
+            lspconfig.html.setup({
+                capabilities = capabilities,
+            })
+            lspconfig.cssls.setup({
+                capabilities = capabilities,
+            })
+        end,
+    },
 }
