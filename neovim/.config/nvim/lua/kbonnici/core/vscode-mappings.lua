@@ -42,28 +42,4 @@ map("n", "x", '"_x')
 -- remove Q mapping (can remap to something later?)
 map("n", "Q", "<nop>")
 
--- shortcut to save and quit
-map("n", "<leader>q", ":q<CR>")
-map("n", "<leader>w", ":w<CR>")
-
--- splits
-map("n", "<leader>sh", "<C-w>s") -- horizontal split
-map("n", "<leader>sv", "<C-w>v") -- vertical split
-map("n", "<leader>se", "<C-w>=") -- set splits to equal width
-map("n", "<leader>sx", ":close<CR>") -- close current split
--- move between splits easily
-map("n", "<C-h>", "<C-w>h")
-map("n", "<C-j>", "<C-w>j")
-map("n", "<C-k>", "<C-w>k")
-map("n", "<C-l>", "<C-w>l")
-
--- tabs
-map("n", "<leader>to", ":tabnew<CR>") -- open new tab
-map("n", "<leader>tx", ":tabclose<CR>") -- close current tab
-map("n", "<leader>tn", ":tabn<CR>") -- next tab
-map("n", "<leader>tp", ":tabp<CR>") -- prev tab
-
--- telescope mappings
-
--- neotree
-map("n", "<leader>e", ":Neotree toggle<CR>")
+map("n", "<leader>e", ":lua require('vscode-neovim').action(\"workbench.action.toggleSidebarVisibility\")<CR>")
