@@ -33,7 +33,8 @@ which exa > /dev/null && alias ls="exa"
 which python3 > /dev/null && alias p3="python3"
 alias gs="git status"
 alias gc="git commit"
-alias gp="git push"
+alias gp="git pull"
+alias gP="git push"
 
 # bun completions
 [ -s "/Users/karl/.bun/_bun" ] && source "/Users/karl/.bun/_bun"
