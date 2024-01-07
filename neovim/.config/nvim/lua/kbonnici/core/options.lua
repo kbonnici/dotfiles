@@ -7,6 +7,9 @@ opt.relativenumber = true
 -- disable changing cursor for different modes
 opt.guicursor = ""
 
+-- disable mode information in default statusline
+opt.showmode = false
+
 -- tabs
 opt.tabstop = 4
 opt.softtabstop = 4
