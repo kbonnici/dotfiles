@@ -61,13 +61,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("UserLspConfig", {}),
     callback = function(ev)
         local opts = { buffer = ev.buf }
-        -- since some LSP's don't implement declaration, use definition as a fallback
-        vim.keymap.set("n", "gD", function()
-            local result = vim.lsp.buf.declaration()
-            if not result then
-                vim.lsp.buf.definition()
-            end
-        end, opts)
         vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
         vim.keymap.set("n", "gT", vim.lsp.buf.type_definition, opts)
         vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
@@ -75,6 +68,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
         vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
         vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, opts)
         vim.keymap.set({ "n", "v" }, "<space>la", vim.lsp.buf.code_action, opts)
+        -- since some LSP's don't implement declaration, use definition as a fallback
+        vim.keymap.set("n", "gD", function()
+            local result = vim.lsp.buf.declaration()
+            if not result then
+                vim.lsp.buf.definition()
+            end
+        end, opts)
 
         local ok, trouble = pcall(require, "trouble")
         if not ok then
