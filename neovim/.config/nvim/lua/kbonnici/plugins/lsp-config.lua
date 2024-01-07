@@ -18,26 +18,39 @@ return {
 		config = function()
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 			local lspconfig = require("lspconfig")
-			lspconfig.lua_ls.setup({
-				capabilities = capabilities,
-				settings = {
-					Lua = {
-						workspace = {
-							library = {
-								vim.env.VIMRUNTIME .. "/lua",
+
+			require("mason-lspconfig").setup_handlers({
+				-- default handler
+				function(server_name)
+					lspconfig[server_name].setup({
+						capabilities = capabilities,
+					})
+				end,
+				-- Handlers for specific servers
+				["lua_ls"] = function()
+					lspconfig.lua_ls.setup({
+						capabilities = capabilities,
+						settings = {
+							Lua = {
+								workspace = {
+									library = {
+										vim.env.VIMRUNTIME .. "/lua",
+									},
+								},
 							},
 						},
-					},
-				},
+					})
+				end,
 			})
-			lspconfig.tsserver.setup({
-				capabilities = capabilities,
-			})
-			lspconfig.html.setup({
-				capabilities = capabilities,
-			})
-			lspconfig.cssls.setup({
-				capabilities = capabilities,
+
+			vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format)
+			vim.api.nvim_create_autocmd("BufWritePost", {
+				callback = function()
+					-- only format if an lsp is attached
+					if next(vim.lsp.get_clients()) ~= nil then
+						vim.lsp.buf.format()
+					end
+				end,
 			})
 		end,
 	},

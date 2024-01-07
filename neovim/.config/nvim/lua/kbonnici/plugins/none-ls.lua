@@ -10,23 +10,5 @@ return {
                 null_ls.builtins.diagnostics.eslint_d,
             },
         })
-
-        vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format)
-        vim.api.nvim_create_autocmd("BufWritePost", {
-            pattern = {
-                "*.js", -- JS ecosystem
-                "*.jsx",
-                "*.ts",
-                "*.tsx",
-                "*.html",
-                "*.css", 
-                "*.lua", -- Lua
-                "*.rs", -- Rust
-                "*.go", -- Go
-            },
-            callback = function()
-                vim.lsp.buf.format()
-            end,
-        })
     end,
 }
