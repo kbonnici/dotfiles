@@ -43,12 +43,14 @@ return {
 				end,
 			})
 
-			vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format)
-			vim.api.nvim_create_autocmd("BufWritePost", {
+			vim.keymap.set("n", "<leader>gf", function()
+				vim.lsp.buf.format({ async = false })
+			end)
+			vim.api.nvim_create_autocmd("BufWritePre", {
 				callback = function()
 					-- only format if an lsp is attached
 					if next(vim.lsp.get_clients()) ~= nil then
-						vim.lsp.buf.format()
+						vim.lsp.buf.format({ async = false })
 					end
 				end,
 			})
