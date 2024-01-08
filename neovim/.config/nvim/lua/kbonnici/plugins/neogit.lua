@@ -4,11 +4,11 @@ return {
 		"nvim-lua/plenary.nvim",
 		"sindrets/diffview.nvim",
 
-        "nvim-telescope/telescope.nvim",
-    },
+		"nvim-telescope/telescope.nvim",
+	},
 
-    config = true,
-    keys = {
-        { "<leader>gg", ":Neogit kind=auto<cr>", desc = "NeoGit" }
-    }
+	config = function()
+		require("neogit").setup()
+		vim.keymap.set("n", "<leader>gg", "<cmd>Neogit<cr>")
+	end,
 }
