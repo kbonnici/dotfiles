@@ -5,14 +5,6 @@ return {
 			"saadparwaiz1/cmp_luasnip",
 			"rafamadriz/friendly-snippets",
 		},
-		config = function()
-			local ls = require("luasnip")
-			ls.setup()
-
-			vim.keymap.set({ "i", "s" }, "<tab>", function()
-				ls.jump(1)
-			end, { silent = true })
-		end,
 	},
 	{
 		"hrsh7th/cmp-nvim-lsp",
@@ -25,6 +17,21 @@ return {
 		config = function()
 			require("luasnip.loaders.from_vscode").lazy_load()
 			local cmp = require("cmp")
+			local ls = require("luasnip")
+
+			-- autocmd to forget snippet if you don't complete it
+			-- https://github.com/L3MON4D3/LuaSnip/issues/656#issuecomment-1313310146
+			local unlinkgrp = vim.api.nvim_create_augroup("UnlinkSnippetOnModeChange", { clear = true })
+			vim.api.nvim_create_autocmd("ModeChanged", {
+				group = unlinkgrp,
+				pattern = { "s:n", "i:*" },
+				desc = "Forget the current snippet when leaving the insert mode",
+				callback = function(evt)
+					if ls.session and ls.session.current_nodes[evt.buf] and not ls.session.jump_active then
+						ls.unlink_current()
+					end
+				end,
+			})
 			cmp.setup({
 				snippet = {
 					expand = function(args)
@@ -41,6 +48,11 @@ return {
 					["<C-Space>"] = cmp.mapping.complete(),
 					["<C-e>"] = cmp.mapping.abort(),
 					["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+					["<C-m>"] = cmp.mapping(function() -- jump to next part of snippet
+						if ls.expand_or_jumpable() then
+							ls.expand_or_jump()
+						end
+					end, { "i", "s" }),
 				}),
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
