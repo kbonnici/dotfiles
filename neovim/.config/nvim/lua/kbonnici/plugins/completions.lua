@@ -5,6 +5,14 @@ return {
 			"saadparwaiz1/cmp_luasnip",
 			"rafamadriz/friendly-snippets",
 		},
+		config = function()
+			local ls = require("luasnip")
+			ls.setup()
+
+			vim.keymap.set({ "i", "s" }, "<tab>", function()
+				ls.jump(1)
+			end, { silent = true })
+		end,
 	},
 	{
 		"hrsh7th/cmp-nvim-lsp",
