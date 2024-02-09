@@ -10,10 +10,11 @@ opt.guicursor = ""
 -- disable mode information in default statusline
 opt.showmode = false
 
+local tabwidth = 2
 -- tabs
-opt.tabstop = 4
-opt.softtabstop = 4
-opt.shiftwidth = 4
+opt.tabstop = tabwidth
+opt.softtabstop = tabwidth
+opt.shiftwidth = tabwidth
 opt.expandtab = true
 
 opt.smartindent = true
