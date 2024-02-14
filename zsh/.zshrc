@@ -27,3 +27,4 @@ alias gP="git push"
 
 # starship prompt
 eval "$(starship init zsh)"
+eval "$(zoxide init --cmd cd zsh)"
