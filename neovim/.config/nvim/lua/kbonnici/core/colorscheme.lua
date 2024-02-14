@@ -1,8 +1,8 @@
-local color = 'rose-pine'
+local color = "catppuccin"
 
 local ok, _ = pcall(vim.cmd.colorscheme, color)
 if not ok then
-  vim.cmd.colorscheme('default')
+  vim.cmd.colorscheme("default")
 end
 
 -- transparent background
