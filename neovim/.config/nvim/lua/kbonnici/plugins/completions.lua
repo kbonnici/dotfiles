@@ -56,7 +56,7 @@ return {
           ["<C-e>"] = cmp.mapping.abort(),
           ["<C-y>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
           ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-          ["<C-m>"] = cmp.mapping(function(fallback)
+          ["<C-g>"] = cmp.mapping(function(fallback)
             if ls.expand_or_jumpable() then
               ls.expand_or_jump()
             else
