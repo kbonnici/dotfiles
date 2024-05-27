@@ -33,6 +33,11 @@ return {
 				end, { expr = true })
 
 				-- Actions
+				map("n", "<leader>hl", function()
+					gs.toggle_linehl()
+					gs.toggle_numhl()
+				end)
+				map("n", "<leader>hq", gs.setqflist)
 				map("n", "<leader>hs", gs.stage_hunk)
 				map("n", "<leader>hr", gs.reset_hunk)
 				map("v", "<leader>hs", function()
