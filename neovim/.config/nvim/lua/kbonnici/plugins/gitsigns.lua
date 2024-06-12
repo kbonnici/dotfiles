@@ -1,5 +1,7 @@
 return {
 	"lewis6991/gitsigns.nvim",
+	lazy = true,
+	event = "VeryLazy",
 	config = function()
 		require("gitsigns").setup({
 			on_attach = function(bufnr)
@@ -11,23 +13,38 @@ return {
 					vim.keymap.set(mode, l, r, opts)
 				end
 
+				local ok, ts_repeat_move = pcall(require, "nvim-treesitter.textobjects.repeatable_move")
+				local next_hunk_repeat, prev_hunk_repeat = nil, nil
+				if ok then
+					next_hunk_repeat, prev_hunk_repeat =
+						ts_repeat_move.make_repeatable_move_pair(gs.next_hunk, gs.prev_hunk)
+				end
+
 				-- Navigation
-				map("n", "]c", function()
+				map({ "n", "x", "o" }, "]c", function()
 					if vim.wo.diff then
 						return "]c"
 					end
 					vim.schedule(function()
-						gs.next_hunk()
+						if not next_hunk_repeat then
+							gs.next_hunk()
+						else
+							next_hunk_repeat()
+						end
 					end)
 					return "<Ignore>"
 				end, { expr = true })
 
-				map("n", "[c", function()
+				map({ "n", "x", "o" }, "[c", function()
 					if vim.wo.diff then
 						return "[c"
 					end
 					vim.schedule(function()
-						gs.prev_hunk()
+						if not prev_hunk_repeat then
+							gs.prev_hunk()
+						else
+							prev_hunk_repeat()
+						end
 					end)
 					return "<Ignore>"
 				end, { expr = true })
