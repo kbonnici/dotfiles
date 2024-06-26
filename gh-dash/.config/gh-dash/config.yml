@@ -50,9 +50,10 @@ keybindings:
   prs:
     - key: e
       command: >
-        tmux display-popup -d {{.RepoPath}} -w 90% -h 80% -E 'nvim -c ":Octo pr edit {{.PrNumber}}"'
+        tmux new-window -n "PR #{{.PrNumber}}" -c {{.RepoPath}} 'nvim -c ":silent Octo pr edit {{.PrNumber}}"'
 repoPaths:
   tempo-io/roadmunk: ~/work/leeward/tempo/roadmunk/
+  kbonnici/dotfiles: ~/dotfiles
 theme:
   ui:
     table:
