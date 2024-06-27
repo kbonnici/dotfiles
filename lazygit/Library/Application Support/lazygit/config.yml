@@ -1,3 +1,7 @@
+os:
+  editPreset: "nvim"
+gui:
+  nerdFontsVersion: "3"
 customCommands:
   - key: "o"
     command: "nvim -c ':Octo pr create'"
