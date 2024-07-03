@@ -24,7 +24,9 @@ alias gs="git status"
 alias gc="git commit"
 alias gp="git pull"
 alias gP="git push"
-alias vv='nvim $(fzf-tmux -p 80%,60% --info=inline-right --border --height 40% --preview "bat --theme=\"Catppuccin Macchiato\" --color=always {}")'
+alias -g -- -h='-h 2>&1 | bat --language=help --style=plain'
+alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
+
 
 # starship prompt
 eval "$(starship init zsh)"
@@ -40,3 +42,10 @@ export FZF_DEFAULT_OPTS=" \
 --color=bg+:#363a4f,bg:#24273a,spinner:#f4dbd6,hl:#ed8796 \
 --color=fg:#cad3f5,header:#ed8796,info:#c6a0f6,pointer:#f4dbd6 \
 --color=marker:#f4dbd6,fg+:#cad3f5,prompt:#c6a0f6,hl+:#ed8796"
+
+export EDITOR="nvim"
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
+[ -f ~/.zsh_functions ] && source ~/.zsh_functions
+
+bindkey -s '^p' 'find_files\n'

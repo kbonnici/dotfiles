@@ -1,0 +1,5 @@
+# fzf browse files
+find_files() {
+	IFS=$'\n' files=($(fzf --query="$1" --multi --select-1 --exit-0 --prompt 'files:' --preview='bat {}'))
+	[[ -n "$files" ]] && ${EDITOR} "${files[@]}"
+}
