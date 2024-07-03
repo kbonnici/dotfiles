@@ -13,3 +13,7 @@ customCommands:
 keybinding:
   branches:
     createPullRequest: "O"
+git:
+  paging:
+    colorArg: always
+    pager: diff-so-fancy
