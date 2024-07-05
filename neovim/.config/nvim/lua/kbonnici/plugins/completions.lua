@@ -1,20 +1,23 @@
 return {
 	{
 		"L3MON4D3/LuaSnip",
+		event = "VeryLazy",
 		dependencies = {
-			"saadparwaiz1/cmp_luasnip",
-			"rafamadriz/friendly-snippets",
+			{ "saadparwaiz1/cmp_luasnip", event = "VeryLazy" },
+			{ "rafamadriz/friendly-snippets", event = "VeryLazy" },
 		},
 		build = "make install_jsregexp",
 	},
 	{
 		"hrsh7th/cmp-nvim-lsp",
+		event = "VeryLazy",
 	},
-	{ "hrsh7th/cmp-buffer" },
-	{ "hrsh7th/cmp-path" },
-	{ "hrsh7th/cmp-cmdline" },
+	{ "hrsh7th/cmp-buffer", event = "VeryLazy" },
+	{ "hrsh7th/cmp-path", event = "VeryLazy" },
+	{ "hrsh7th/cmp-cmdline", event = "VeryLazy" },
 	{
 		"hrsh7th/nvim-cmp",
+		event = "VeryLazy",
 		config = function()
 			require("luasnip.loaders.from_vscode").lazy_load()
 			local cmp = require("cmp")

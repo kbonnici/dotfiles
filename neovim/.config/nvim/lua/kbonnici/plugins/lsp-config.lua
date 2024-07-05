@@ -1,12 +1,14 @@
 return {
 	{
 		"williamboman/mason.nvim",
+		event = "VeryLazy",
 		config = function()
 			require("mason").setup()
 		end,
 	},
 	{
 		"williamboman/mason-lspconfig.nvim",
+		event = "VeryLazy",
 		config = function()
 			require("mason-lspconfig").setup({
 				ensure_installed = { "lua_ls", "tsserver", "html", "cssls" },
@@ -15,6 +17,7 @@ return {
 	},
 	{
 		"neovim/nvim-lspconfig",
+		event = "VeryLazy",
 		config = function()
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 			local lspconfig = require("lspconfig")
@@ -58,6 +61,7 @@ return {
 		dependencies = {
 			{
 				"nvimdev/lspsaga.nvim",
+				event = "VeryLazy",
 				config = function()
 					require("lspsaga").setup({
 						symbol_in_winbar = { -- breadcrumbs
