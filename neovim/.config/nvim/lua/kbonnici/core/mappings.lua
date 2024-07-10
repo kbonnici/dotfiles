@@ -67,7 +67,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, opts)
     vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
     vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, opts)
-    vim.keymap.set({ "n", "v" }, "<space>la", vim.lsp.buf.code_action, opts)
+    -- vim.keymap.set({ "n", "v" }, "<space>la", vim.lsp.buf.code_action, opts)
     -- since some LSP's don't implement declaration, use definition as a fallback
     vim.keymap.set("n", "gD", function()
       local result = vim.lsp.buf.declaration()
