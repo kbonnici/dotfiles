@@ -37,3 +37,4 @@ opt.isfname:append("@-@")
 -- opt.colorcolumn = "80"
 
 opt.updatetime = 50
+opt.conceallevel = 2
