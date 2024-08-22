@@ -15,5 +15,6 @@ return {
 		trouble_map("<leader>xx", "diagnostics")
 		trouble_map("<leader>xs", "lsp_document_symbols")
 		trouble_map("<leader>xl", "lsp")
+		trouble_map("<leader>xf", "qflist")
 	end,
 }

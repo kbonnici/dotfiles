@@ -56,6 +56,13 @@ map("n", "<C-j>", "<C-w>j")
 map("n", "<C-k>", "<C-w>k")
 map("n", "<C-l>", "<C-w>l")
 
+-- terminal mode mappings
+map("t", "<esc>", "<C-\\><C-n>")
+map("t", "<C-h>", "<C-\\><C-w>h")
+map("t", "<C-j>", "<C-\\><C-w>j")
+map("t", "<C-k>", "<C-\\><C-w>k")
+map("t", "<C-l>", "<C-\\><C-w>l")
+
 -- LSP
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("UserLspConfig", {}),
@@ -76,13 +83,21 @@ vim.api.nvim_create_autocmd("LspAttach", {
       end
     end, opts)
 
-    -- local ok, trouble = pcall(require, "trouble")
-    -- if not ok then
-    --   vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-    -- else
-    --   vim.keymap.set("n", "gr", function()
-    --     trouble.toggle("lsp_references")
-    --   end, opts)
-    -- end
+    local ok, trouble = pcall(require, "trouble")
+    if not ok then
+      vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+    else
+      vim.keymap.set("n", "gr", function()
+        trouble.toggle("lsp_references")
+      end, opts)
+
+      vim.keymap.set("n", "gD", function()
+        trouble.toggle("lsp_declarations")
+      end, opts)
+
+      vim.keymap.set("n", "gI", function()
+        trouble.toggle("lsp_implementations")
+      end, opts)
+    end
   end,
 })

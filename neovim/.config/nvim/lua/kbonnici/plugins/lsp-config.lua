@@ -76,8 +76,6 @@ return {
             },
           })
 
-          vim.keymap.set("n", "gr", "<cmd>Lspsaga finder ref<cr>")
-          vim.keymap.set("n", "gi", "<cmd>Lspsaga finder imp<cr>")
           vim.keymap.set("n", "gd", "<cmd>Lspsaga goto_definition<cr>")
           vim.keymap.set("n", "<leader>lr", "<cmd>Lspsaga rename<cr>")
           vim.keymap.set("n", "<leader>lpr", "<cmd>Lspsaga lsp_rename ++project<cr>")
