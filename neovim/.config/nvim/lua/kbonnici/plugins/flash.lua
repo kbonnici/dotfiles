@@ -3,12 +3,25 @@ return {
 	event = "VeryLazy",
 	opts = {
 		jump = {
-			autojump = true,
+			pos = "end",
+		},
+		label = {
+			rainbow = {
+				enabled = true,
+				shade = 3,
+			},
 		},
 		modes = {
 			char = {
 				jump_labels = true,
 				multi_line = false,
+				autohide = true,
+				highlight = {
+					backdrop = false,
+				},
+				jump = {
+					autojump = true,
+				},
 			},
 		},
 	},
