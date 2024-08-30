@@ -10,6 +10,10 @@ return {
 				},
 				mru = {
 					limit = 3,
+					cwd_only = true,
+				},
+				project = {
+					enable = false,
 				},
 				shortcut = {
 					{ desc = " Update", group = "@property", action = "Lazy update", key = "u" },
