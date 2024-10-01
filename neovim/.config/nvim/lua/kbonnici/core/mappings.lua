@@ -2,8 +2,8 @@
 vim.g.mapleader = " "
 
 local map = function(mode, mapping, target, options)
-  local opts = options or { silent = true, noremap = true }
-  vim.keymap.set(mode, mapping, target, opts)
+	local opts = options or { silent = true, noremap = true }
+	vim.keymap.set(mode, mapping, target, opts)
 end
 
 -- move selected text up and down
@@ -45,9 +45,9 @@ map("n", "<leader>q", ":q<CR>")
 map("n", "<leader>w", ":w<CR>")
 
 -- splits
-map("n", "<leader>sh", "<C-w>s")     -- horizontal split
-map("n", "<leader>sv", "<C-w>v")     -- vertical split
-map("n", "<leader>se", "<C-w>=")     -- set splits to equal width
+map("n", "<leader>sh", "<C-w>s") -- horizontal split
+map("n", "<leader>sv", "<C-w>v") -- vertical split
+map("n", "<leader>se", "<C-w>=") -- set splits to equal width
 map("n", "<leader>sx", ":close<CR>") -- close current split
 --
 -- move between splits easily
@@ -65,39 +65,40 @@ map("t", "<C-l>", "<C-\\><C-w>l")
 
 -- LSP
 vim.api.nvim_create_autocmd("LspAttach", {
-  group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-  callback = function(ev)
-    local opts = { buffer = ev.buf }
-    -- vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-    vim.keymap.set("n", "gT", vim.lsp.buf.type_definition, opts)
-    -- vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-    vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, opts)
-    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-    vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, opts)
-    -- vim.keymap.set({ "n", "v" }, "<space>la", vim.lsp.buf.code_action, opts)
-    -- since some LSP's don't implement declaration, use definition as a fallback
-    vim.keymap.set("n", "gD", function()
-      local result = vim.lsp.buf.declaration()
-      if not result then
-        vim.lsp.buf.definition()
-      end
-    end, opts)
+	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+	callback = function(ev)
+		local opts = { buffer = ev.buf }
+		-- vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+		vim.keymap.set("n", "gT", vim.lsp.buf.type_definition, opts)
+		-- vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+		vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, opts)
+		vim.keymap.set("n", "gl", vim.diagnostic.open_float, opts)
+		vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+		vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, opts)
+		-- vim.keymap.set({ "n", "v" }, "<space>la", vim.lsp.buf.code_action, opts)
+		-- since some LSP's don't implement declaration, use definition as a fallback
+		vim.keymap.set("n", "gD", function()
+			local result = vim.lsp.buf.declaration()
+			if not result then
+				vim.lsp.buf.definition()
+			end
+		end, opts)
 
-    local ok, trouble = pcall(require, "trouble")
-    if not ok then
-      vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-    else
-      vim.keymap.set("n", "gr", function()
-        trouble.toggle("lsp_references")
-      end, opts)
+		local ok, trouble = pcall(require, "trouble")
+		if not ok then
+			vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+		else
+			vim.keymap.set("n", "gr", function()
+				trouble.toggle("lsp_references")
+			end, opts)
 
-      vim.keymap.set("n", "gD", function()
-        trouble.toggle("lsp_declarations")
-      end, opts)
+			vim.keymap.set("n", "gD", function()
+				trouble.toggle("lsp_declarations")
+			end, opts)
 
-      vim.keymap.set("n", "gI", function()
-        trouble.toggle("lsp_implementations")
-      end, opts)
-    end
-  end,
+			vim.keymap.set("n", "gI", function()
+				trouble.toggle("lsp_implementations")
+			end, opts)
+		end
+	end,
 })
