@@ -3,16 +3,6 @@ os:
   promptToReturnFromSubprocess: false
 gui:
   nerdFontsVersion: "3"
-customCommands:
-  - key: "o"
-    command: "nvim -c ':Octo pr create'"
-    context: "localBranches"
-    loadingText: "Loading Octo"
-    description: "Open pull request with Octo"
-    subprocess: true
-keybinding:
-  branches:
-    createPullRequest: "O"
 git:
   paging:
     colorArg: always
