@@ -7,6 +7,8 @@ opt.relativenumber = true
 -- disable changing cursor for different modes
 opt.guicursor = ""
 
+opt.cursorline = true
+
 -- disable mode information in default statusline
 opt.showmode = false
 
