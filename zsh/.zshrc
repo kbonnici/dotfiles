@@ -18,7 +18,7 @@ which nvim > /dev/null && \
     alias vi="nvim" && \
     alias v="nvim" && \
     alias lc="nvim leetcode.nvim"
-which exa > /dev/null && alias ls="exa"
+which eza > /dev/null && alias ls="eza"
 which python3 > /dev/null && alias p3="python3"
 alias gs="git status"
 alias gc="git commit"
