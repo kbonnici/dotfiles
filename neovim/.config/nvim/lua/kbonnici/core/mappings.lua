@@ -55,6 +55,10 @@ map("n", "<C-h>", "<C-w>h")
 map("n", "<C-j>", "<C-w>j")
 map("n", "<C-k>", "<C-w>k")
 map("n", "<C-l>", "<C-w>l")
+map("n", "<C-Left>", "<C-w>h")
+map("n", "<C-Down>", "<C-w>j")
+map("n", "<C-Up>", "<C-w>k")
+map("n", "<C-Right>", "<C-w>l")
 
 -- terminal mode mappings
 map("t", "<esc>", "<C-\\><C-n>")
