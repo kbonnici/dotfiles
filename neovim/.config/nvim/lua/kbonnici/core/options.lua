@@ -5,7 +5,7 @@ opt.number = true
 opt.relativenumber = true
 
 -- disable changing cursor for different modes
-opt.guicursor = ""
+-- opt.guicursor = ""
 
 opt.cursorline = true
 
