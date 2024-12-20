@@ -1,7 +1,7 @@
 return {
   "saghen/blink.cmp",
   -- optional: provides snippets for the snippet source
-  dependencies = "rafamadriz/friendly-snippets",
+  dependencies = { "rafamadriz/friendly-snippets", { "L3MON4D3/LuaSnip", version = "v2.*" } },
   -- use a release tag to download pre-built binaries
   version = "v0.*",
   ---@module 'blink.cmp'
@@ -19,14 +19,23 @@ return {
       use_nvim_cmp_as_default = true,
       nerd_font_variant = "mono",
     },
-
-    -- default list of enabled providers defined so that you can extend it
-    -- elsewhere in your config, without redefining it, via `opts_extend`
-    sources = {
-      default = { "lsp", "path", "snippets", "buffer" },
-      -- optionally disable cmdline completions
+    snippets = {
+      expand = function(snippet)
+        require("luasnip").lsp_expand(snippet)
+      end,
+      active = function(filter)
+        if filter and filter.direction then
+          return require("luasnip").jumpable(filter.direction)
+        end
+        return require("luasnip").in_snippet()
+      end,
+      jump = function(direction)
+        require("luasnip").jump(direction)
+      end,
     },
-
+    sources = {
+      default = { "lsp", "path", "luasnip", "buffer" },
+    },
     -- experimental signature help support
     -- signature = { enabled = true },
 
