@@ -67,9 +67,9 @@ layout {
                 tab_active_sync         "#[bg=$base,fg=$peach]#[bg=$peach,fg=$crust,bold]{index} #[bg=$surface1,fg=$peach,bold] {name}{sync_indicator}#[bg=$base,fg=$surface1]"
                 tab_separator           "#[bg=$base] "
 
-                tab_sync_indicator       " "
+                tab_sync_indicator       "  "
                 tab_fullscreen_indicator " 󰊓"
-                tab_floating_indicator   " 󰹙"
+                tab_floating_indicator   " 󰹙 "
 
                 notification_format_unread "#[bg=base,fg=$yellow]#[bg=$yellow,fg=$crust] #[bg=$surface1,fg=$yellow] {message}#[bg=$base,fg=$yellow]"
                 notification_format_no_notifications ""
@@ -86,7 +86,7 @@ layout {
                 command_user_rendermode "static"
 
                 datetime          "{format}"
-                datetime_format   "%d-%m-%Y 󰅐 %I:%M"
+                datetime_format   "%d %m %Y 󰅐 %I:%M"
                 datetime_timezone "America/Vancouver"
             }
         }
