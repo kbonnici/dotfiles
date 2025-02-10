@@ -18,8 +18,43 @@ return {
     statuscolumn = { enabled = true },
     words = { enabled = true },
     lazygit = { enabled = true },
+    picker = { enabled = true }
   },
   keys = {
+    {
+      "<c-p>",
+      function()
+        Snacks.picker.smart()
+      end,
+      desc = "Smart Find Files",
+    },
+    {
+      "<c-,>",
+      function()
+        Snacks.picker.buffers()
+      end,
+      desc = "Buffers",
+    },
+    {
+      "<c-/>",
+      function() Snacks.picker.grep() end,
+      desc = "Grep"
+    },
+    {
+      "<leader>bg",
+      function() Snacks.picker.grep_buffers() end,
+      desc = "Grep Buffers"
+    },
+    {
+      "<leader>fh",
+      function() Snacks.picker.help() end,
+      desc = "Help Pages"
+    },
+    {
+      "<leader>fc",
+      function() Snacks.picker.colorschemes() end,
+      desc = "Colorschemes"
+    },
     {
       "<leader>z",
       function()
@@ -112,7 +147,7 @@ return {
       desc = "Dismiss All Notifications",
     },
     {
-      "<c-/>",
+      "<c-;>",
       function()
         Snacks.terminal()
       end,
