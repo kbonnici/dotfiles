@@ -53,11 +53,3 @@ export AWS_SECRET_ACCESS_KEY="test"
 alias awslocal="aws --endpoint-url=http://localhost:4566"
 
 bindkey -s '^p' 'find_files\n'
-
-# bun completions
-[ -s "/Users/karl/.bun/_bun" ] && source "/Users/karl/.bun/_bun"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-. "/Users/karl/.deno/env"
