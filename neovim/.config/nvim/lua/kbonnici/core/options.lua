@@ -40,3 +40,4 @@ opt.isfname:append("@-@")
 
 opt.updatetime = 50
 opt.conceallevel = 2
+vim.diagnostic.config({ severity_sort = true })

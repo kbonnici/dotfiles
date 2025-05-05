@@ -18,13 +18,29 @@ return {
     statuscolumn = { enabled = true },
     words = { enabled = true },
     lazygit = { enabled = true },
+    terminal = {
+      keys = {
+        term_normal = {
+          "<esc>",
+          function(self)
+            vim.cmd("stopinsert")
+          end,
+          mode = "t",
+          expr = true
+        }
+      }
+    },
     picker = { enabled = true }
   },
   keys = {
     {
       "<c-p>",
       function()
-        Snacks.picker.smart()
+        Snacks.picker.smart({
+          filter = {
+            cwd = true,
+          }
+        })
       end,
       desc = "Smart Find Files",
     },
