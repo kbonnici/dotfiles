@@ -12,6 +12,8 @@ opt.cursorline = true
 -- disable mode information in default statusline
 opt.showmode = false
 
+opt.laststatus = 3
+
 local tabwidth = 2
 -- tabs
 opt.tabstop = tabwidth

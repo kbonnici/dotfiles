@@ -6,13 +6,15 @@ return {
       require("mason").setup()
     end,
   },
-  {
-    "williamboman/mason-lspconfig.nvim",
-    event = "VeryLazy",
-    config = function()
-      require("mason-lspconfig").setup({})
-    end,
-  },
+  -- {
+  -- 	"williamboman/mason-lspconfig.nvim",
+  -- 	event = "VeryLazy",
+  -- 	config = function()
+  -- 		require("mason-lspconfig").setup({
+  -- 			automatic_enable = false,
+  -- 		})
+  -- 	end,
+  -- },
   {
     "neovim/nvim-lspconfig",
     event = "BufReadPost",
@@ -48,30 +50,10 @@ return {
       { "saghen/blink.cmp" },
     },
     config = function()
-      local lspconfig = require("lspconfig")
-      local capabilities = require("blink.cmp").get_lsp_capabilities()
-
-      require("mason-lspconfig").setup_handlers({
-        -- default handler
-        function(server_name)
-          lspconfig[server_name].setup({
-            capabilities = capabilities,
-          })
-        end,
-        ["denols"] = function()
-          lspconfig["denols"].setup({
-            root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
-            capabilities = capabilities,
-          })
-        end,
-        ["ts_ls"] = function()
-          lspconfig["ts_ls"].setup({
-            root_dir = lspconfig.util.root_pattern("package.json"),
-            single_file_support = false,
-            capabilities = capabilities,
-          })
-        end,
-      })
+      local lsps = { "ts_ls", "lua_ls", "eslint" }
+      for _, server in ipairs(lsps) do
+        vim.lsp.enable(server)
+      end
 
       vim.keymap.set("n", "<leader>gf", function()
         vim.lsp.buf.format({ async = false })
