@@ -50,7 +50,7 @@ return {
       { "saghen/blink.cmp" },
     },
     config = function()
-      local lsps = { "ts_ls", "lua_ls", "eslint" }
+      local lsps = { "ts_ls", "lua_ls", "eslint", "astro" }
       for _, server in ipairs(lsps) do
         vim.lsp.enable(server)
       end
