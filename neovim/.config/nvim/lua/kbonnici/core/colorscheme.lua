@@ -6,8 +6,9 @@ if not ok then
 end
 
 -- transparent background
-vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+-- vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+-- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+
 --vim.api.nvim_set_hl(0, "FloatBorder", { bg = "none" })
 --vim.api.nvim_set_hl(0, "NvimTreeWinSeparator", { bg = "none" })
 --vim.api.nvim_set_hl(0, "NvimTreeNormal", { bg = "none" })
