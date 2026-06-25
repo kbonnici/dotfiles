@@ -1,3 +1,6 @@
+-- Add mason bin to PATH so LSP servers can be found
+vim.env.PATH = vim.env.PATH .. ":" .. vim.fn.stdpath("data") .. "/mason/bin"
+
 if vim.g.vscode then
   local vscode = require("vscode-neovim")
   if vscode then
