@@ -1,11 +1,12 @@
 {
-  "lastChangelogVersion": "0.74.0",
-  "defaultProvider": "opencode",
-  "defaultModel": "minimax-m2.5-free",
+  "lastChangelogVersion": "0.80.3",
+  "defaultProvider": "openrouter",
+  "defaultModel": "deepseek/deepseek-v4-flash",
   "editorPaddingX": 1,
   "defaultThinkingLevel": "high",
-  "enabledModels": [
-    "opencode/minimax-m2.5-free"
+  "theme": "dark",
+  "packages": [
+    "npm:@juicesharp/rpiv-todo"
   ],
-  "theme": "dark"
+  "hideThinkingBlock": false
 }
