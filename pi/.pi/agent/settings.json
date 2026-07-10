@@ -1,12 +1,31 @@
 {
-  "lastChangelogVersion": "0.80.3",
-  "defaultProvider": "openrouter",
-  "defaultModel": "deepseek/deepseek-v4-flash",
+  "lastChangelogVersion": "0.80.6",
+  "defaultProvider": "opencode-go",
+  "defaultModel": "deepseek-v4-flash",
   "editorPaddingX": 1,
-  "defaultThinkingLevel": "high",
-  "theme": "dark",
+  "defaultThinkingLevel": "max",
+  "theme": "my-theme",
   "packages": [
-    "npm:@juicesharp/rpiv-todo"
+    "npm:pi-subagents"
   ],
-  "hideThinkingBlock": false
+  "hideThinkingBlock": true,
+  "quietStartup": false,
+  "treeFilterMode": "default",
+  "enabledModels": [
+    "opencode-go/deepseek-v4-flash",
+    "opencode-go/deepseek-v4-pro"
+  ],
+  "subagents": {
+    "agentOverrides": {
+      "oracle": {
+        "disabled": true
+      },
+      "context-builder": {
+        "disabled": true
+      },
+      "delegate": {
+        "disabled": true
+      }
+    }
+  }
 }

@@ -1,0 +1,15 @@
+lastupdatecheck: 1770827240
+recentrepos:
+    - /Users/karl/dotfiles
+    - /Users/karl/work/primera/epista-stack
+    - /Users/karl/work/primera/epista-backend
+    - /Users/karl/work/leeward/genesis/g2
+    - /Users/karl/projects/ginger
+    - /Users/karl/projects/load-balancer
+    - /Users/karl/neovim
+startuppopupversion: 5
+didshowhunkstaginghint: true
+lastversion: 0.59.0
+customcommandshistory:
+    - 'nvim: install leetcode, codecompanion'
+hidecommandlog: false
