@@ -103,10 +103,84 @@ const BLOCKED_PATTERNS: RegExp[] = [
   /\b(vim?|nano|emacs|code|subl)\b/i,
 ];
 
+// ---------------------------------------------------------------------------
+// Subagents blocked in plan mode
+//
+// Prevents circumventing plan mode's read-only restrictions by delegating
+// write work to an implementation subagent. Management actions (list,
+// status, create, etc.) are always allowed regardless.
+// ---------------------------------------------------------------------------
+
+const BLOCKED_SUBAGENTS = ["worker"];
+
 function isSafeCommand(command: string): boolean {
   const isDestructive = BLOCKED_PATTERNS.some((p) => p.test(command));
   const isSafe = SAFE_PATTERNS.some((p) => p.test(command));
   return !isDestructive && isSafe;
+}
+
+// ---------------------------------------------------------------------------
+// Subagent call blocker for plan mode
+//
+// Recursively checks all agent references in a subagent() call (single,
+// parallel tasks, chain steps, and parallel groups within chain steps).
+// Management actions (action field set) are always allowed.
+// ---------------------------------------------------------------------------
+
+function isBlockedSubagentCall(
+  input: Record<string, unknown>,
+): { blocked: boolean; agent?: string } {
+  // Management actions (list, get, create, status, interrupt, resume, etc.)
+  // are always allowed -- they don't spawn execution agents.
+  if (typeof input.action === "string" && input.action.length > 0) {
+    return { blocked: false };
+  }
+
+  function agentIsBlocked(name: string): boolean {
+    const normalized = name.toLowerCase().replace(/\s+/g, "");
+    return BLOCKED_SUBAGENTS.some((blocked) => {
+      const b = blocked.toLowerCase().replace(/\s+/g, "");
+      return (
+        normalized === b ||
+        normalized.startsWith(b + ".") ||
+        normalized.startsWith(b + "[")
+      );
+    });
+  }
+
+  // Single agent mode
+  if (typeof input.agent === "string" && agentIsBlocked(input.agent)) {
+    return { blocked: true, agent: input.agent };
+  }
+
+  // Parallel mode
+  if (Array.isArray(input.tasks)) {
+    for (const task of input.tasks) {
+      if (typeof task.agent === "string" && agentIsBlocked(task.agent)) {
+        return { blocked: true, agent: task.agent };
+      }
+    }
+  }
+
+  // Chain mode
+  if (Array.isArray(input.chain)) {
+    for (const step of input.chain) {
+      // Simple step with agent
+      if (typeof step.agent === "string" && agentIsBlocked(step.agent)) {
+        return { blocked: true, agent: step.agent };
+      }
+      // Parallel group within a chain step
+      if (Array.isArray(step.parallel)) {
+        for (const child of step.parallel) {
+          if (typeof child.agent === "string" && agentIsBlocked(child.agent)) {
+            return { blocked: true, agent: child.agent };
+          }
+        }
+      }
+    }
+  }
+
+  return { blocked: false };
 }
 
 // Mode guidance injected fresh every turn (never persisted to history).
@@ -217,23 +291,40 @@ export default function(pi: ExtensionAPI) {
   });
 
   // ---------------------------------------------------------------------------
-  // Bash allowlist enforcement (plan mode only)
+  // Bash and subagent enforcement (plan mode only)
   //
-  // Blocks destructive bash commands in plan mode. Read-only commands (file
-  // inspection, search, git read operations, etc.) are allowed.
+  // - Blocks destructive bash commands (write/edit/delete operations).
+  // - Blocks subagent calls that would spawn blocked agents (e.g. "worker"),
+  //   preventing circumvention of plan mode's read-only restrictions.
   // ---------------------------------------------------------------------------
   pi.on("tool_call", async (event) => {
-    if (!planMode || event.toolName !== "bash") return;
+    if (!planMode) return;
 
-    const command = event.input.command as string;
-    if (!isSafeCommand(command)) {
-      return {
-        block: true,
-        reason:
-          `Plan mode: bash command blocked (not in allowlist). ` +
-          `Switch to build mode first with /plan or Ctrl+Alt+P.\n` +
-          `Command: ${command}`,
-      };
+    if (event.toolName === "bash") {
+      const command = event.input.command as string;
+      if (!isSafeCommand(command)) {
+        return {
+          block: true,
+          reason:
+            `Plan mode: bash command blocked (not in allowlist). ` +
+            `Switch to build mode first with /plan or Ctrl+Alt+P.\n` +
+            `Command: ${command}`,
+        };
+      }
+    }
+
+    if (event.toolName === "subagent") {
+      const result = isBlockedSubagentCall(
+        event.input as Record<string, unknown>,
+      );
+      if (result.blocked) {
+        return {
+          block: true,
+          reason:
+            `Plan mode: subagent "${result.agent}" is blocked in plan mode. ` +
+            `Switch to build mode first with /plan or Ctrl+Alt+P to use this agent.`,
+        };
+      }
     }
   });
 
