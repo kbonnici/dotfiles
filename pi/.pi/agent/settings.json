@@ -1,12 +1,13 @@
 {
-  "lastChangelogVersion": "0.80.6",
+  "lastChangelogVersion": "0.81.1",
   "defaultProvider": "opencode-go",
   "defaultModel": "deepseek-v4-flash",
   "editorPaddingX": 1,
   "defaultThinkingLevel": "max",
   "theme": "my-theme",
   "packages": [
-    "npm:pi-subagents"
+    "npm:pi-subagents",
+    "npm:pi-web-access"
   ],
   "hideThinkingBlock": true,
   "quietStartup": false,
